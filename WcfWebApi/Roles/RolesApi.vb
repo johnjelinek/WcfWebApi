@@ -12,7 +12,11 @@ Imports Microsoft.ApplicationServer.Http.Dispatcher
 Namespace Roles
     <ServiceContract()>
     Public Class RolesApi
-        Private ReadOnly _repo As New RolesRepository()
+        Private ReadOnly _repo As IRolesRepository
+
+        Public Sub New(ByVal repo As IRolesRepository)
+            _repo = repo
+        End Sub
 
         <WebGet()>
         Public Function GetRole() As HttpResponseMessage(Of IQueryable(Of Role))

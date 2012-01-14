@@ -12,12 +12,11 @@ Public Class Global_asax
 
     Sub Application_Start(ByVal sender As Object, ByVal e As EventArgs)
         ' Fires when the application is started
-        RouteTable.Routes.SetDefaultHttpConfiguration(New Microsoft.ApplicationServer.Http.WebApiConfiguration())
-        'With
-        '{
-        '    .CreateInstance = Function(serviceType, context, request) _
-        '                      GetKernel().Get(serviceType)
-        '})
+        RouteTable.Routes.SetDefaultHttpConfiguration(New Microsoft.ApplicationServer.Http.WebApiConfiguration() With
+        {
+            .CreateInstance = Function(serviceType, context, request) _
+                              GetKernel().Get(serviceType)
+        })
 
         RouteTable.Routes.MapServiceRoute(Of Roles.RolesApi)("Api/Roles")
     End Sub
@@ -53,6 +52,5 @@ Public Class Global_asax
 
         Return kernel
     End Function
-
 
 End Class
